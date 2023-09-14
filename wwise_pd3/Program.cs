@@ -12,14 +12,11 @@ namespace wwise_pd3
 	{
 		public static void PrintHelp()
 		{
-			Console.WriteLine("Usage: wwise_pd3 -decode/-encode <input> <output>");
+			Console.WriteLine("Usage: wwise_pd3 -decode/-encode sfx/voice <input> <output>");
 		}
 
-		static void EncodeToWem(string[] args)
+		static void EncodeToWem(string input, string output)
 		{
-			var input = args[1];
-			var output = args[2];
-
 			BinaryReader br = new BinaryReader(File.OpenRead(input));
 
 			var header = WAVE.ReadHeaderFromWAV(br);
@@ -83,11 +80,8 @@ namespace wwise_pd3
 			bw.Close();
 		}
 
-		static void DecodeFromWEM(string[] args)
+		static void DecodeFromWEM(string input, string output)
 		{
-			var input = args[1];
-			var output = args[2];
-
 			BinaryReader br = new BinaryReader(File.OpenRead(input));
 
 			var header = WAVE.ReadWEMHeaderToWAVHeader(br);
@@ -169,12 +163,27 @@ namespace wwise_pd3
 					return;
 			}
 
+			bool sfx = false;
+
+			switch(args[1].ToLower())
+			{
+				case "sfx":
+					sfx = true;
+					break;
+				case "voice":
+					sfx = false;
+					break;
+				default:
+					Console.WriteLine("Please provide a valid type (sfx or voice");
+					return;
+			}
+
 			if (encoding)
 			{
-				EncodeToWem(args);
+				EncodeToWem(args[2], args[3]);
 			} else
 			{
-				DecodeFromWEM(args);
+				DecodeFromWEM(args[2], args[3]);
 				//Console.WriteLine("Decoding is not supported");
 			}
 		}
