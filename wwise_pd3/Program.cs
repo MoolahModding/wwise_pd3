@@ -12,7 +12,7 @@ namespace wwise_pd3
 	{
 		public static void PrintHelp()
 		{
-			Console.WriteLine("Usage: wwise_pd3 -decode/-encode sfx/voice <input> <output>");
+			Console.WriteLine("Usage: wwise_pd3 -decode/-encode <input> <output>");
 		}
 
 		static void EncodeToWem(string input, string output)
@@ -42,8 +42,8 @@ namespace wwise_pd3
 
 			//br.Read(data, (int)br.BaseStream.Position, (int)(br.BaseStream.Length - br.BaseStream.Position));
 			byte[] data = br.ReadBytes((int)(File.ReadAllBytes(input).LongLength - br.BaseStream.Position));
-			Console.WriteLine(File.ReadAllBytes(input).LongLength);
-			Console.WriteLine(br.BaseStream.Length);
+			//Console.WriteLine(File.ReadAllBytes(input).LongLength);
+			//Console.WriteLine(br.BaseStream.Length);
 
 			Console.WriteLine(data.Length);
 
@@ -101,10 +101,10 @@ namespace wwise_pd3
 			Console.WriteLine(String.Format("Bits per Sample: {0}", header.bitspersample));
 
 			byte[] data = br.ReadBytes((int)(File.ReadAllBytes(input).LongLength - br.BaseStream.Position));
-			Console.WriteLine(File.ReadAllBytes(input).LongLength);
-			Console.WriteLine(br.BaseStream.Length);
+			//Console.WriteLine(File.ReadAllBytes(input).LongLength);
+			//Console.WriteLine(br.BaseStream.Length);
 
-			Console.WriteLine(data.Length);
+			//Console.WriteLine(data.Length);
 
 			br.Close();
 
@@ -160,21 +160,6 @@ namespace wwise_pd3
 					break;
 				default:
 					Console.WriteLine("Please provide a method (encoding or decoding)"); ;
-					return;
-			}
-
-			bool sfx = false;
-
-			switch(args[1].ToLower())
-			{
-				case "sfx":
-					sfx = true;
-					break;
-				case "voice":
-					sfx = false;
-					break;
-				default:
-					Console.WriteLine("Please provide a valid type (sfx or voice");
 					return;
 			}
 
