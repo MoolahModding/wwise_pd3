@@ -3,4 +3,4 @@ Open source tool to encode/decode PCM WAV files to WEM and vice versa. Intended 
 
 Usage: `wwise_pd3 -decode/-encode <input> <output>`
 
-**Currently does not support localised voice lines**
+**please tell me if it works on voicelines**
