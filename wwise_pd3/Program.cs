@@ -165,10 +165,10 @@ namespace wwise_pd3
 
 			if (encoding)
 			{
-				EncodeToWem(args[2], args[3]);
+				EncodeToWem(args[1], args[2]);
 			} else
 			{
-				DecodeFromWEM(args[2], args[3]);
+				DecodeFromWEM(args[1], args[2]);
 				//Console.WriteLine("Decoding is not supported");
 			}
 		}
